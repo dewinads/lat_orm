@@ -17,7 +17,7 @@ app.get('/produk', (req,res) => {
 //GET by ID
 app.get('/produk/:id', (req, res) => {
     Produk.findOne({
-        where: { id: req.params.id }
+        where: { id: req.params.id },
     })
     .then(produk => {
         res.status(200).json(produk)
@@ -52,7 +52,7 @@ app.put('/produk/:id', (req, res) => {
             where: { id: req.params.id },
         }
     )
-    .then(() => {
+    .then(produk => {
         res.status(200).json({ message: "Produk berhasil di update" });
     })
     .catch((err) => {
@@ -65,7 +65,7 @@ app.delete('/produk/:id', (req, res) => {
     Produk.destroy({
         where: { id: req.params.id },
     })
-    .then(() => {
+    .then(produk => {
         res.sendStatus(204)
     })
     .catch(err => {
